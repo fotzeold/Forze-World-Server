@@ -1,8 +1,6 @@
 function stripColorCodes(inputString) {
 	const colorCodePattern = /§./g;
-
 	const strippedString = inputString.replace(colorCodePattern, '');
-
 	return strippedString;
 }
 
@@ -15,7 +13,7 @@ function transformOnlineString(strippedString, roleOrder = ['Бог', 'Геро�
 			return parts[1].split(", ");
 		});
 
-	if (playerLines.length >= 0) {
+	if (playerLines.length <= 0) {
 		return "На даний момент на сервері нікого немає!"
 	}
 
