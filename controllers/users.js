@@ -17,9 +17,9 @@ async function loginUser(req, res) {
 	if (!username || !password) return res.status(404).json({ status: false, message: "Ви не передали імя або пароль!" });
 
 	userAEModelConnect.getUserByUsername(username, async (err, data) => {
-		if (err) {
-			return res.status(500).json({ status: false, message: err });
-		}
+		if (err) return res.status(500).json({ status: false, message: err });
+		if (data.length === 0) return res.status(404).json({ status: false, message: "Не вірний логін або пароль!" });
+
 		const [prefix, salt, hash] = data[0].password.split('$').slice(1);
 
 		const firstHash = sha256(password);
