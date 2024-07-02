@@ -1,5 +1,6 @@
 import mysql from "mysql";
 import UserAuthEssentModel from "../models/users.js";
+import NewsModel from "../models/news.js";
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -19,6 +20,7 @@ connection.connect((err) => {
 });
 
 const userAEModelConnect = new UserAuthEssentModel(connection);
+const NewsModelConnect = new NewsModel(connection)
 
-export { userAEModelConnect };
+export { userAEModelConnect, NewsModelConnect };
 
