@@ -5,32 +5,52 @@ class NewsModel {
 		this.connection = connection;
 	}
 
-	createNews(body, author, callback) {
+	createNews(body, author) {
 		const date = new Date();
-		this.connection.query(
-			'INSERT INTO news (body, author, date) VALUES (?, ?, ?)',
-			[body, author, date],
-			(err, result) => {
-				if (err) {
-					callback(err, null);
-					return;
+		return new Promise((resolve, reject) => {
+			this.connection.query(
+				'INSERT INTO news (body, author, date) VALUES (?, ?, ?)',
+				[body, author, date],
+				(err, result) => {
+					if (err) {
+						reject(err);
+						return;
+					}
+					resolve(result);
 				}
-				callback(null, result);
-			}
-		);
+			);
+		});
 	}
 
-	getAllNews(callback) {
-		this.connection.query(
-			'SELECT * FROM news ORDER BY date DESC',
-			(err, results) => {
-				if (err) {
-					callback(err, null);
-					return;
+	getAllNews() {
+		return new Promise((resolve, reject) => {
+			this.connection.query(
+				'SELECT * FROM news ORDER BY date DESC',
+				(err, results) => {
+					if (err) {
+						reject(err);
+						return;
+					}
+					resolve(results);
 				}
-				callback(null, results);
-			}
-		);
+			);
+		});
+	}
+
+	deleteNewsById(id) {
+		return new Promise((resolve, reject) => {
+			this.connection.query(
+				'DELETE FROM news WHERE id = ?',
+				[id],
+				(err, result) => {
+					if (err) {
+						reject(err);
+						return;
+					}
+					resolve(result);
+				}
+			);
+		});
 	}
 }
 

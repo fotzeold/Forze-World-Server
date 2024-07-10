@@ -1,5 +1,6 @@
 import { userAEModelConnect } from "../utils/connection.js";
 import sha256 from "sha256";
+import generateToken from "../utils/generateToken.js"
 
 async function getAllUsers(req, res) {
 	userAEModelConnect.getAllUsers((err, data) => {
@@ -26,7 +27,8 @@ async function loginUser(req, res) {
 		const computedHash = sha256(firstHash + salt)
 
 		if (computedHash === hash) {
-			return res.status(200).json({ status: true, user: { ...data[0], password: hash } });
+			const token = generateToken(data[0]);
+			return res.status(200).json({ status: true, token, user: { ...data[0], password: hash } });
 		}
 
 		return res.status(404).json({ status: false, message: "Не вірний логін або пароль!" });

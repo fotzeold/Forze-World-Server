@@ -11,6 +11,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"@scriptserver/core": "^2.0.4",
 		"bcrypt": "^5.1.1",
 		"cookie-parser": "^1.4.6",
 		"cors": "^2.8.5",
@@ -23,10 +24,9 @@
 		"mysql": "^2.18.1",
 		"node-telegram-bot-api": "^0.65.1",
 		"open": "^10.1.0",
+		"scriptserver": "^1.2.1",
 		"sha256": "^0.2.0",
-		"socket.io": "^4.7.5",
-		"@scriptserver/core": "^2.0.4",
-		"scriptserver": "^1.2.1"
+		"socket.io": "^4.7.5"
 	},
 	"devDependencies": {
 		"nodemon": "^3.0.3"
